@@ -7,7 +7,6 @@ public class Main {
 
     private static String a() {
         return "Hello";
-        return "Csao";
     }
     private static String b() {
         return "vilag";
