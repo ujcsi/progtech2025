@@ -2,6 +2,13 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello Vilag!\n");
+        System.out.println(a()+" "+b());
+    }
+
+    private static String a() {
+        return "Szia";
+    }
+    private static String b() {
+        return "vilag";
     }
 }
