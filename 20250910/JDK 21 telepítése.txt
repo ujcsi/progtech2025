@@ -1,0 +1,193 @@
+JDK 21 telepítése:
+innen kell letölteni:
+https://www.oracle.com/europe/java/technologies/downloads/#jdk21-windows
+Ezt kell választani:
+
+x64 Compressed Archive	186.05 MB	
+https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.zip (sha256)
+letölteni 
+kibontani
+Egy helyre kimásolni amit kibontott
+c:\Java mappába lett másolva
+Környezeti változók beállítása
+Rendszer tulajdonságok
+Környezeti változók
+Rendszerváltozók
+NEW
+Új rendszerváltozó
+A változó neve:JAVA_HOME
+A változó értéke:C:\Java\jdk-21.0.8
+A könyvtár helye lesz ahova be lett másolva a JDK.
+Path szerkesztés és egy új sort kell betenni:
+%JAVA_HOME%\bin
+Ez egy újsor lesz a Path-ban
+------------------------------
+Maven telepítése:
+maven download
+Ezt le kell tölteni:
+apache-maven-3.9.11-bin.zip
+letölteni 
+kibontani
+Egy helyre kimásolni amit kibontott
+Környezeti változók beállítása
+Rendszer tulajdonságok
+Környezeti változók
+Rendszerváltozók
+c:\Opt mappába lett másolva
+Környezeti változók beállítása
+Rendszer tulajdonságok
+Környezeti változók
+Rendszerváltozók
+NEW
+Új rendszerváltozó
+A változó neve:MAVEN_HOME
+A változó értéke:C:\Opt\apache-maven-3.9.11
+NEW
+Új rendszerváltozó
+A változó neve:MAVEN_OPTS
+A változó értéke:-Xms256m -Xmx512m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Xint -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+
+Path szerkesztés és egy új sort kell betenni:
+%MAVEN_HOME%\bin
+Ez egy újsor lesz a Path-ban
+
+Kész a telepítés
+
+mvn -v
+vagy
+mvn --version
+kiírja a maven és a JDK verzió számát
+
+IntelliJ Community Edition
+letölteni
+
+https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC
+
+Git alapok:
+git bash
+letöltése
+Asztal jobb egér
+Open Git Bash here
+bejön egy ablak
+git status
+
+
+GitHUB regisztráció
+Új repozitory létrehozása
+Ezt publikussá kell tenni hogy rá tudjanak látni
+Kapcsoljuk be a READme-t
+A github-on létre jött az új repozitory
+
+Git parancsok
+ez már a helyi gépen kell miután fel lett telepítve a git
+
+git beállítása:
+git config user.name"ujcsi" ez csak projekt szintű arra a mappára -> ez nem kell
+be kell állítani hogy ez globális legyen az egész rendszeren
+git config --global user.name"ujcsi" -> ez kell
+
+A System csak arra állítja be amelyik felhasználó be van lépve
+git config --System user.name"ujcsi"  - > ez nem kell
+git config --global user.email"ujcsi@satrax.hu"
+git config ellenőrzése:
+git config -l
+ezek a beállítások a github-hoz kellenek
+
+Parancssori beállításhoz kell az SSH
+Github weben a jobb felső sarokban (zöld fej írka)
+Ez a saját profilunk
+ebben van a settings(beállítások)
+SSH and GPG keys menüpont
+SSH key kell
+ki kell adni parancssorban a következő parancsot:
+ssh-keygen -o -t rsa -C "ujcsi@satrax.hu"
+Ez generál egy kulcsot a saját könyvtárunkba.
+nekem a C:\Users\Dell/.ssh/id_rsa
+id_rsa lesz a fájl neve alapesetben
+Ha ez nem jó akkor ki kell másolni a teljes elérési utat és átírni a fájl nevét.
+Ha van ilyen akkor kérdezi hogy felülírja e
+illetve jelszó is állítható be hozzá
+azt most nem állítjuk be
+készült 2db kulcs egy privát és egy publikus
+id_rsa ez a saját kulcsunk ezt ne adjuk ki senkinek sem
+id_rsa.pub ez a publikus kulcs
+
+ezt a publikus kulcsot kell beadni a GitHubnak is
+Ennek a fájlnak a tartalmát kell bemásolni az előbbi GitHubnál az SSH résznél new SSH key ponthoz.
+ezzel azonosít a GitHub hogy a privát kulcs megfelel a publikus kulcsunknak.
+Adni kell neki egy SSH nevet és jelszó kell majd a jóváhagyáshoz.
+utána
+A GitHubon kiválasztani az új repozitory-t code zöld ikon
+HTTPS-ről át kell kapcsolni SSH-ra
+
+csinálni kell egy könyvtárat vagy megadni a helyi gépen hogy hova töltse le a távoli repozitory tartalmát
+ebbe a mappába belépni és az open git bash here elindítani
+kiadni a következő utasítást:
+git clone git@github.com:ujcsi/progtech2025.git
+parancsot
+git@github.com:ujcsi/progtech2025.git
+ez a repozitorynál az SSH-ból kell másolni a parancsba a github-ról ami az adott repozotorynál jelenik meg
+ha bele megyünk a mappába a helyi gépen ott lesz egy .git mappa ha itt indítjuk el az open git bash here-t akkor kiírja az elérési utat és a vége (main) lesz kékkel.
+így lehet egy távoli repozitory-t lehúzni egy helyi mappába.
+
+csináljunk egy alma.txt-t itt a helyi gépen
+ open git bash here
+git status
+
+mutatja hogy létrejött egy új fájl
+ez egy untracked file lett
+ezzel nem foglalkozik amig ki nem adjuk az add parancsot
+git add alma.txt
+ezzel staged file lett
+git status
+itt látszik is
+ezzel a paranccsal lehet a staged-ről levenni a fájlt így megint nem csinál semmit vele
+git restore --staged alma.txt
+git add .
+hozzáad minden fájt ami változott nem kell egyesével hozzáadni
+az add parancsnál a fájlnévnél számít a kis és nagy betű
+
+git commit -m "új fájl az alma.txt és módosítva a readme"
+
+az első kommit csak a helyi repo-ba teszi bele a változtatást
+git push -u --set-upstream origin main
+
+ezzel megjelenik a github-on is már a változás
+adjunk hozzá most a GitHubon egy új fájlt korte.txt
+így csak a GitHubon van meg a változás még
+
+git pull
+ezzel a paranccsal letöltődik a saját gépünkre a helyi repo-ba a változtatás
+
+Ha mind a 2 helyen történik eltérő változás a fájlokba a helyibe is meg a távoli repo-ba is
+korte.txt tartalom átírása a helyibe almára
+a távoliba meg barack-ra
+ekkor lesz
+persze előtte le kell kommitolni rendesen a helyibe
+git push -u
+parancs után konfliktus
+ha le akarjuk pull-ozni akkor is konfliktus lesz
+a helyi commit után 
+ilyenkor a git status is írja a konfliktust
+booth modify mindkét helyen változás van
+fel kell oldani a konfliktust pl intelij-ben
+utána kommitolni kell megint
+kommit után már nem írja hogy Merging
+utána mehet a push
+git push -u
+
+
+  
+
+
+
+
+
+
+
+
+
+ 
+  
+
+ 
